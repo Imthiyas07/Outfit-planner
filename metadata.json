@@ -1,0 +1,6 @@
+{
+  "name": "Outfit Planner",
+  "description": "A simple and modern web application to save clothes, create outfits, and plan daily wear.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
