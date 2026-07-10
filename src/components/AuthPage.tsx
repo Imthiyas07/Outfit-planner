@@ -121,7 +121,7 @@ export default function AuthPage({ onAuthSuccess }: AuthPageProps) {
         </div>
 
         <div className="text-xs text-slate-500 relative z-10 mt-8 md:mt-0">
-          © 2026 Outfit Planner. Crafted with clean React & Java Servlet architecture blueprints.
+          © 2026 Outfit Planner.
         </div>
       </div>
 

@@ -7,6 +7,17 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
+import { GoogleGenAI, Type } from '@google/genai';
+
+// Initialize Gemini Client
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+  httpOptions: {
+    headers: {
+      'User-Agent': 'aistudio-build',
+    }
+  }
+});
 
 // Initialize express app
 const app = express();
@@ -15,6 +26,9 @@ const PORT = 3000;
 // Middleware for parsing JSON and urlencoded data
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Serve custom wardrobe assets
+app.use('/src/assets/images', express.static(path.join(process.cwd(), 'src/assets/images')));
 
 // Ensure data folder exists
 const DATA_DIR = path.join(process.cwd(), 'data');
@@ -46,74 +60,259 @@ const initialDBState: DatabaseSchema = {
     }
   ],
   clothes: [
+    // --- SHIRTS ---
     {
-      id: "cloth-1",
+      id: "cloth-shirt-1",
       userId: "demo-user",
-      name: "Classic White T-Shirt",
+      name: "White Formal Shirt",
       category: "Tops",
       color: "White",
-      occasion: "Casual",
-      imageUrl: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=400",
+      occasion: "Formal",
+      imageUrl: "/src/assets/images/white_formal_shirt_1783701961307.jpg",
       createdAt: new Date().toISOString()
     },
     {
-      id: "cloth-2",
+      id: "cloth-shirt-2",
       userId: "demo-user",
-      name: "Dark Blue Slim Jeans",
+      name: "Black Shirt",
+      category: "Tops",
+      color: "Black",
+      occasion: "Party",
+      imageUrl: "/src/assets/images/black_shirt_1783701970742.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shirt-3",
+      userId: "demo-user",
+      name: "Navy Blue Shirt",
+      category: "Tops",
+      color: "Navy",
+      occasion: "Work",
+      imageUrl: "/src/assets/images/navy_blue_shirt_1783701982078.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shirt-4",
+      userId: "demo-user",
+      name: "Light Blue Shirt",
+      category: "Tops",
+      color: "Blue",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/light_blue_shirt_1783701994914.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shirt-5",
+      userId: "demo-user",
+      name: "Olive Green Shirt",
+      category: "Tops",
+      color: "Green",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/olive_green_shirt_1783702006151.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shirt-6",
+      userId: "demo-user",
+      name: "Beige Shirt",
+      category: "Tops",
+      color: "Beige",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/beige_shirt_1783702028962.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shirt-7",
+      userId: "demo-user",
+      name: "Grey Shirt",
+      category: "Tops",
+      color: "Grey",
+      occasion: "Work",
+      imageUrl: "/src/assets/images/grey_shirt_1783702040000.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shirt-8",
+      userId: "demo-user",
+      name: "Brown Shirt",
+      category: "Tops",
+      color: "Brown",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/brown_shirt_1783702051720.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shirt-9",
+      userId: "demo-user",
+      name: "Maroon Shirt",
+      category: "Tops",
+      color: "Maroon",
+      occasion: "Party",
+      imageUrl: "/src/assets/images/maroon_shirt_1783702063557.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shirt-10",
+      userId: "demo-user",
+      name: "Sky Blue Shirt",
+      category: "Tops",
+      color: "Blue",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/sky_blue_shirt_1783702075155.jpg",
+      createdAt: new Date().toISOString()
+    },
+
+    // --- PANTS ---
+    {
+      id: "cloth-pant-1",
+      userId: "demo-user",
+      name: "Black Jeans",
+      category: "Bottoms",
+      color: "Black",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/black_jeans_1783702089506.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-pant-2",
+      userId: "demo-user",
+      name: "Blue Jeans",
       category: "Bottoms",
       color: "Blue",
       occasion: "Casual",
-      imageUrl: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=400",
+      imageUrl: "/src/assets/images/blue_jeans_1783702101249.jpg",
       createdAt: new Date().toISOString()
     },
     {
-      id: "cloth-3",
+      id: "cloth-pant-3",
       userId: "demo-user",
-      name: "Vintage Black Leather Jacket",
-      category: "Outerwear",
+      name: "Grey Formal Trousers",
+      category: "Bottoms",
+      color: "Grey",
+      occasion: "Formal",
+      imageUrl: "/src/assets/images/grey_formal_trousers_1783702111031.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-pant-4",
+      userId: "demo-user",
+      name: "Beige Chinos",
+      category: "Bottoms",
+      color: "Beige",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/beige_chinos_1783702121958.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-pant-5",
+      userId: "demo-user",
+      name: "Khaki Chinos",
+      category: "Bottoms",
+      color: "Khaki",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/khaki_chinos_1783702132204.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-pant-6",
+      userId: "demo-user",
+      name: "Navy Blue Trousers",
+      category: "Bottoms",
+      color: "Navy",
+      occasion: "Formal",
+      imageUrl: "/src/assets/images/navy_blue_trousers_1783702146790.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-pant-7",
+      userId: "demo-user",
+      name: "White Trousers",
+      category: "Bottoms",
+      color: "White",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/white_trousers_1783702159054.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-pant-8",
+      userId: "demo-user",
+      name: "Brown Chinos",
+      category: "Bottoms",
+      color: "Brown",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/brown_chinos_1783702170203.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-pant-9",
+      userId: "demo-user",
+      name: "Olive Green Pants",
+      category: "Bottoms",
+      color: "Green",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/olive_green_pants_1783702179763.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-pant-10",
+      userId: "demo-user",
+      name: "Dark Grey Pants",
+      category: "Bottoms",
+      color: "Grey",
+      occasion: "Formal",
+      imageUrl: "/src/assets/images/dark_grey_pants_1783702189695.jpg",
+      createdAt: new Date().toISOString()
+    },
+
+    // --- SHOES ---
+    {
+      id: "cloth-shoe-1",
+      userId: "demo-user",
+      name: "White Sneakers",
+      category: "Shoes",
+      color: "White",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/white_sneakers_1783702202604.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shoe-2",
+      userId: "demo-user",
+      name: "Black Sneakers",
+      category: "Shoes",
       color: "Black",
-      occasion: "Party",
-      imageUrl: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&q=80&w=400",
+      occasion: "Casual",
+      imageUrl: "/src/assets/images/black_sneakers_1783702213566.jpg",
       createdAt: new Date().toISOString()
     },
     {
-      id: "cloth-4",
+      id: "cloth-shoe-3",
       userId: "demo-user",
-      name: "Air Cushion Sneakers",
+      name: "Brown Loafers",
+      category: "Shoes",
+      color: "Brown",
+      occasion: "Formal",
+      imageUrl: "/src/assets/images/brown_loafers_1783702225540.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shoe-4",
+      userId: "demo-user",
+      name: "Black Formal Shoes",
+      category: "Shoes",
+      color: "Black",
+      occasion: "Formal",
+      imageUrl: "/src/assets/images/black_formal_shoes_1783702237397.jpg",
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: "cloth-shoe-5",
+      userId: "demo-user",
+      name: "White Running Shoes",
       category: "Shoes",
       color: "White",
       occasion: "Sporty",
-      imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=400",
-      createdAt: new Date().toISOString()
-    },
-    {
-      id: "cloth-5",
-      userId: "demo-user",
-      name: "Formal Navy Blue Blazer",
-      category: "Outerwear",
-      color: "Navy",
-      occasion: "Work",
-      imageUrl: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=400",
-      createdAt: new Date().toISOString()
-    },
-    {
-      id: "cloth-6",
-      userId: "demo-user",
-      name: "Chic Summer Floral Dress",
-      category: "Dresses",
-      color: "Yellow",
-      occasion: "Casual",
-      imageUrl: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&q=80&w=400",
-      createdAt: new Date().toISOString()
-    },
-    {
-      id: "cloth-7",
-      userId: "demo-user",
-      name: "Classic Sunglasses",
-      category: "Accessories",
-      color: "Black",
-      occasion: "Casual",
-      imageUrl: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&q=80&w=400",
+      imageUrl: "/src/assets/images/white_running_shoes_1783702249344.jpg",
       createdAt: new Date().toISOString()
     }
   ],
@@ -121,17 +320,17 @@ const initialDBState: DatabaseSchema = {
     {
       id: "outfit-1",
       userId: "demo-user",
-      name: "Casual Streetwear",
-      description: "Perfect standard combination for daily activities.",
-      clothingIds: ["cloth-1", "cloth-2", "cloth-3", "cloth-4"],
+      name: "Smart Casual Chic",
+      description: "A timeless, sharp business casual coordination combining navy, khaki, and brown loafers.",
+      clothingIds: ["cloth-shirt-3", "cloth-pant-5", "cloth-shoe-3"],
       createdAt: new Date().toISOString()
     },
     {
       id: "outfit-2",
       userId: "demo-user",
-      name: "Summer Outing",
-      description: "Fresh look for warm weekend sunny days.",
-      clothingIds: ["cloth-6", "cloth-7", "cloth-4"],
+      name: "Weekend Comfort",
+      description: "Relaxed and clean outfit combination, perfect for brunches or informal weekend hangouts.",
+      clothingIds: ["cloth-shirt-4", "cloth-pant-1", "cloth-shoe-1"],
       createdAt: new Date().toISOString()
     }
   ],
@@ -141,8 +340,8 @@ const initialDBState: DatabaseSchema = {
       userId: "demo-user",
       date: new Date().toISOString().split('T')[0], // Today
       outfitId: "outfit-1",
-      clothingIds: ["cloth-1", "cloth-2", "cloth-3", "cloth-4"],
-      note: "Meeting friends for dinner",
+      clothingIds: ["cloth-shirt-3", "cloth-pant-5", "cloth-shoe-3"],
+      note: "Meeting friends and coworkers for coffee",
       createdAt: new Date().toISOString()
     }
   ]
@@ -162,6 +361,9 @@ const getDB = (): DatabaseSchema => {
     return initialDBState;
   }
 };
+
+// Seed database on startup if file doesn't exist
+getDB();
 
 const saveDB = (db: DatabaseSchema) => {
   fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
@@ -575,6 +777,122 @@ app.delete('/api/calendar/:id', authenticateUser, (req, res) => {
     res.json({ success: true, message: "Calendar plan removed successfully" });
   } catch (error) {
     res.status(500).json({ error: "Failed to remove calendar plan" });
+  }
+});
+
+// WearWise AI Endpoint
+app.post('/api/wearwise/analyze', authenticateUser, async (req, res) => {
+  try {
+    const { imageBase64, mimeType } = req.body;
+    if (!imageBase64 || !mimeType) {
+      res.status(400).json({ error: "Missing image data or mimeType" });
+      return;
+    }
+
+    const imagePart = {
+      inlineData: {
+        mimeType: mimeType,
+        data: imageBase64,
+      },
+    };
+
+    const promptText = `You are WearWise AI, an intelligent fashion styling assistant.
+Analyze the uploaded photo and complete the following tasks:
+1. Detect:
+   - Skin tone (e.g., Fair, Light, Medium, Warm Medium, Light Cool, Tan, Olive, Deep). Be respectful and accurate.
+   - Shirt: Identify the shirt (or T-shirt/top wear) color and style. If not visible, say "Not Detected".
+   - Pant: Identify the pant (or jeans/skirt/bottom wear) color and style. If not visible, say "Not Detected".
+
+2. Based on the detected skin tone, recommend exactly 4 outfit color combinations that naturally complement the user's appearance.
+   Ensure these combinations are highly fashionable, practical, and diverse.
+
+3. Provide a general recommendation advising how to choose colors that complement their detected skin tone and avoid colors that create poor contrast.
+
+Keep your response short, simple, and easy to understand. For any clothing item that is not visible, mention "Not Detected".
+
+Return a structured JSON object strictly conforming to the response schema.`;
+
+    let response;
+    let lastError: any = null;
+    const modelsToTry = ["gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-flash-latest"];
+
+    for (const modelName of modelsToTry) {
+      let attempts = 2;
+      for (let attempt = 1; attempt <= attempts; attempt++) {
+        try {
+          console.log(`Analyzing skin tone and outfit colors using ${modelName} (Attempt ${attempt}/${attempts})...`);
+          response = await ai.models.generateContent({
+            model: modelName,
+            contents: [imagePart, { text: promptText }],
+            config: {
+              responseMimeType: "application/json",
+              responseSchema: {
+                type: Type.OBJECT,
+                properties: {
+                  detected: {
+                    type: Type.OBJECT,
+                    properties: {
+                      skinTone: { type: Type.STRING, description: "Detected skin tone of the person" },
+                      shirt: { type: Type.STRING, description: "Detected shirt/top wear color and type, or 'Not Detected'." },
+                      pant: { type: Type.STRING, description: "Detected pant/bottom wear color and type, or 'Not Detected'." }
+                    },
+                    required: ["skinTone", "shirt", "pant"]
+                  },
+                  recommendedCombinations: {
+                    type: Type.ARRAY,
+                    description: "Exactly 4 outfit color combinations complementing the detected skin tone",
+                    items: {
+                      type: Type.OBJECT,
+                      properties: {
+                        shirt: { type: Type.STRING, description: "Recommended shirt color and style" },
+                        pant: { type: Type.STRING, description: "Recommended pant color and style" },
+                        bestFor: { type: Type.STRING, description: "Best occasions or use cases for this combo" }
+                      },
+                      required: ["shirt", "pant", "bestFor"]
+                    }
+                  },
+                  overallRecommendation: {
+                    type: Type.STRING,
+                    description: "General styling recommendation text about complementing skin tone and avoiding poor contrast."
+                  }
+                },
+                required: ["detected", "recommendedCombinations", "overallRecommendation"]
+              }
+            }
+          });
+          
+          if (response && response.text) {
+            break; // Success!
+          }
+        } catch (err: any) {
+          lastError = err;
+          console.log(`[WearWise Diagnostic] Model ${modelName} status: busy or unavailable on attempt ${attempt}.`);
+          if (attempt < attempts) {
+            // Wait before retry
+            await new Promise((resolve) => setTimeout(resolve, attempt * 500));
+          }
+        }
+      }
+      if (response && response.text) {
+        break; // Success! Break outer loop
+      }
+    }
+
+    if (!response || !response.text) {
+      throw lastError || new Error("Failed to get response from any Gemini model");
+    }
+
+    const resultText = response.text;
+    if (!resultText) {
+      res.status(500).json({ error: "Empty response from Gemini AI" });
+      return;
+    }
+
+    const data = JSON.parse(resultText);
+    res.json(data);
+  } catch (error: any) {
+    console.error("Error in WearWise AI analysis:", error);
+    res.status(500).json({ error: error.message || "Failed to analyze outfit image" });
   }
 });
 

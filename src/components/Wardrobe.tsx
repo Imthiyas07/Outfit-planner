@@ -16,25 +16,40 @@ interface WardrobeProps {
 
 const CATEGORIES = ['All', 'Tops', 'Bottoms', 'Shoes', 'Outerwear', 'Dresses', 'Accessories'];
 const OCCASIONS = ['All', 'Casual', 'Formal', 'Work', 'Sporty', 'Party'];
-const COLORS = ['White', 'Black', 'Blue', 'Grey', 'Red', 'Yellow', 'Green', 'Brown', 'Navy', 'Pink'];
+const COLORS = ['White', 'Black', 'Blue', 'Grey', 'Red', 'Yellow', 'Green', 'Brown', 'Navy', 'Pink', 'Beige', 'Khaki', 'Maroon'];
 
 // Gorgeous predefined premium image presets by category for quick entry
 const PRESETS: Record<string, { name: string; url: string }[]> = {
   'Tops': [
-    { name: "Classic White Tee", url: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=400" },
-    { name: "Cosmopolitan Hoodie", url: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=400" },
-    { name: "Red Tailored Shirt", url: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=400" },
-    { name: "Black Knit Highneck", url: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&q=80&w=400" }
+    { name: "White Formal Shirt", url: "/src/assets/images/white_formal_shirt_1783701961307.jpg" },
+    { name: "Black Shirt", url: "/src/assets/images/black_shirt_1783701970742.jpg" },
+    { name: "Navy Blue Shirt", url: "/src/assets/images/navy_blue_shirt_1783701982078.jpg" },
+    { name: "Light Blue Shirt", url: "/src/assets/images/light_blue_shirt_1783701994914.jpg" },
+    { name: "Olive Green Shirt", url: "/src/assets/images/olive_green_shirt_1783702006151.jpg" },
+    { name: "Beige Shirt", url: "/src/assets/images/beige_shirt_1783702028962.jpg" },
+    { name: "Grey Shirt", url: "/src/assets/images/grey_shirt_1783702040000.jpg" },
+    { name: "Brown Shirt", url: "/src/assets/images/brown_shirt_1783702051720.jpg" },
+    { name: "Maroon Shirt", url: "/src/assets/images/maroon_shirt_1783702063557.jpg" },
+    { name: "Sky Blue Shirt", url: "/src/assets/images/sky_blue_shirt_1783702075155.jpg" }
   ],
   'Bottoms': [
-    { name: "Slim Fit Blue Jeans", url: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=400" },
-    { name: "Beige Tailored Chinos", url: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&q=80&w=400" },
-    { name: "Cozy Lounge Sweatpants", url: "https://images.unsplash.com/photo-1551854838-212c50b4c184?auto=format&fit=crop&q=80&w=400" }
+    { name: "Black Jeans", url: "/src/assets/images/black_jeans_1783702089506.jpg" },
+    { name: "Blue Jeans", url: "/src/assets/images/blue_jeans_1783702101249.jpg" },
+    { name: "Grey Formal Trousers", url: "/src/assets/images/grey_formal_trousers_1783702111031.jpg" },
+    { name: "Beige Chinos", url: "/src/assets/images/beige_chinos_1783702121958.jpg" },
+    { name: "Khaki Chinos", url: "/src/assets/images/khaki_chinos_1783702132204.jpg" },
+    { name: "Navy Blue Trousers", url: "/src/assets/images/navy_blue_trousers_1783702146790.jpg" },
+    { name: "White Trousers", url: "/src/assets/images/white_trousers_1783702159054.jpg" },
+    { name: "Brown Chinos", url: "/src/assets/images/brown_chinos_1783702170203.jpg" },
+    { name: "Olive Green Pants", url: "/src/assets/images/olive_green_pants_1783702179763.jpg" },
+    { name: "Dark Grey Pants", url: "/src/assets/images/dark_grey_pants_1783702189695.jpg" }
   ],
   'Shoes': [
-    { name: "Sporty White Sneakers", url: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=400" },
-    { name: "Brown Classic Loafers", url: "https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&q=80&w=400" },
-    { name: "Athletic Running Shoes", url: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&q=80&w=400" }
+    { name: "White Sneakers", url: "/src/assets/images/white_sneakers_1783702202604.jpg" },
+    { name: "Black Sneakers", url: "/src/assets/images/black_sneakers_1783702213566.jpg" },
+    { name: "Brown Loafers", url: "/src/assets/images/brown_loafers_1783702225540.jpg" },
+    { name: "Black Formal Shoes", url: "/src/assets/images/black_formal_shoes_1783702237397.jpg" },
+    { name: "White Running Shoes", url: "/src/assets/images/white_running_shoes_1783702249344.jpg" }
   ],
   'Outerwear': [
     { name: "Black Leather Jacket", url: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&q=80&w=400" },

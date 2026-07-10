@@ -10,7 +10,7 @@ import Wardrobe from './components/Wardrobe';
 import Outfits from './components/Outfits';
 import CalendarView from './components/CalendarView';
 import Profile from './components/Profile';
-import DeveloperExport from './components/DeveloperExport';
+import WearWise from './components/WearWise';
 
 import { 
   Shirt, LayoutDashboard, Tags, FolderHeart, Calendar, User as UserIcon, 
@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-type TabType = 'dashboard' | 'wardrobe' | 'outfits' | 'calendar' | 'profile' | 'export';
+type TabType = 'dashboard' | 'wardrobe' | 'outfits' | 'calendar' | 'profile' | 'wearwise';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -148,7 +148,7 @@ export default function App() {
     { id: 'outfits', label: 'Outfit Combinations', icon: <FolderHeart className="w-4 h-4" /> },
     { id: 'calendar', label: 'Calendar Planner', icon: <Calendar className="w-4 h-4" /> },
     { id: 'profile', label: 'Profile & Stats', icon: <UserIcon className="w-4 h-4" /> },
-    { id: 'export', label: 'Java/MySQL Code', icon: <Terminal className="w-4 h-4" /> },
+    { id: 'wearwise', label: 'WearWise AI', icon: <Sparkles className="w-4 h-4" /> },
   ];
 
   return (
@@ -470,9 +470,11 @@ export default function App() {
               />
             )}
 
-            {activeTab === 'export' && (
-              <DeveloperExport />
+            {activeTab === 'wearwise' && (
+              <WearWise token={token} />
             )}
+
+
           </motion.div>
         </AnimatePresence>
       </main>
