@@ -3,7 +3,7 @@
    Version: 2.0
 ========================================================= */
 
-const CACHE_NAME = "zeriqai-v2";
+const CACHE_NAME = "wearwise";
 
 const STATIC_FILES = [
   "/",
